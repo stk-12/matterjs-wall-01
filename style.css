@@ -32,11 +32,12 @@ body {
 .contents {
   width: 100%;
   height: 100vh;
-  background: #fff;
+  background: #d1c6b8;
   display: grid;
   place-items: center;
 }
 .contents p {
   font-size: 10vw;
+  color: #444442;
   font-weight: 600;
 }

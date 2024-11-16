@@ -11,7 +11,13 @@ const Engine = Matter.Engine,
   Events = Matter.Events;
 
 // エンジンの生成
-const engine = Engine.create();
+const engine = Engine.create({
+  gravity: { // 重力設定
+    scale: 0.002,
+    // x: 0.5,
+    y: 1.1,
+  },
+});
 const world = engine.world;
 
 // セッティング
@@ -20,16 +26,15 @@ const settings = {
   height: window.innerHeight + 100,
   wall: {
     size: 20,
-    options: { isStatic: true, render: { opacity: 0 } }
+    options: { isStatic: true, render: { opacity: 0 } },
+    colors: [
+      // '#d1c6b8',
+      '#b7a99a',
+      '#9a8a7e',
+      '#7f705c',
+      '#5f5c4f'
+    ]
   },
-  // pin: {
-  //   radius: 30,
-  //   options: { isStatic: true, render: { fillStyle: '#ffffff' } }
-  // },
-  // resetPositions: {
-  //   ball1: { x: window.innerWidth / 2, y: window.innerHeight / 4 },
-  //   ball2: { x: window.innerWidth / 2, y: window.innerHeight - 50 }
-  // }
 }
 
 // レンダラーの生成
@@ -61,9 +66,9 @@ const stack = Composites.stack(0, -blockHeight / 2, columns, rows, 0, 0, (x, y) 
       // isStatic: true, // 静的なオブジェクトにする
       density: 1.0, // 重さ
       restitution: 0.0, // 弾性
-      friction: 0.8, // 摩擦
+      friction: 0.9, // 摩擦
       render: {
-        fillStyle: '#222222'
+        fillStyle: settings.wall.colors[Math.floor(Math.random() * settings.wall.colors.length)]
       }
     });
 });
