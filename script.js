@@ -27,6 +27,10 @@ const settings = {
   wall: {
     size: 20,
     options: { isStatic: true, render: { opacity: 0 } },
+  },
+  block: {
+    width: (window.innerHeight + 100) / 8,
+    height: (window.innerHeight + 100) / 8,
     colors: [
       // '#d1c6b8',
       '#b7a99a',
@@ -34,7 +38,7 @@ const settings = {
       '#7f705c',
       '#5f5c4f'
     ]
-  },
+  }
 }
 
 // レンダラーの生成
@@ -56,26 +60,24 @@ Runner.run(runner, engine);
 
 
 // ブロックのスタック生成
-const blockWidth = 100;
-const blockHeight = 100;
-const columns = Math.ceil(settings.width / blockWidth) - 1;
-const rows = Math.ceil(settings.height / blockHeight) - 1;
+const columns = Math.ceil(settings.width / settings.block.width) - 1;
+const rows = Math.ceil(settings.height / settings.block.height);
 
-const stack = Composites.stack(0, -blockHeight / 2, columns, rows, 0, 0, (x, y) => {
-    return Bodies.rectangle(x, y, blockWidth, blockHeight, {
+const stack = Composites.stack(0, -settings.block.height / 2, columns, rows, 0, 0, (x, y) => {
+    return Bodies.rectangle(x, y, settings.block.width, settings.block.height, {
       // isStatic: true, // 静的なオブジェクトにする
       density: 1.0, // 重さ
       restitution: 0.0, // 弾性
       friction: 0.9, // 摩擦
       render: {
-        fillStyle: settings.wall.colors[Math.floor(Math.random() * settings.wall.colors.length)]
+        fillStyle: settings.block.colors[Math.floor(Math.random() * settings.block.colors.length)]
       }
     });
 });
 
 // 床の生成
 const createWalls = () => [
-  Bodies.rectangle(settings.width / 2, settings.height + settings.wall.size / 2, settings.width + blockWidth * 2, settings.wall.size, settings.wall.options), // 下の壁
+  Bodies.rectangle(settings.width / 2, settings.height + settings.wall.size / 2, settings.width + settings.block.width * 2, settings.wall.size, settings.wall.options), // 下の壁
 ];
 
 // ワールドにすべてのボディ（オブジェクト）を追加
