@@ -60,7 +60,7 @@ Runner.run(runner, engine);
 
 
 // ブロックのスタック生成
-const columns = Math.ceil(settings.width / settings.block.width) - 1;
+const columns = Math.ceil(settings.width / settings.block.width);
 const rows = Math.ceil(settings.height / settings.block.height);
 
 const stack = Composites.stack(0, -settings.block.height / 2, columns, rows, 0, 0, (x, y) => {
@@ -77,7 +77,7 @@ const stack = Composites.stack(0, -settings.block.height / 2, columns, rows, 0, 
 
 // 床の生成
 const createWalls = () => [
-  Bodies.rectangle(settings.width / 2, settings.height + settings.wall.size / 2, settings.width + settings.block.width * 2, settings.wall.size, settings.wall.options), // 下の壁
+  Bodies.rectangle(settings.width / 2, settings.height + settings.wall.size / 2, settings.width + settings.block.width * 4, settings.wall.size, settings.wall.options), // 下の壁
 ];
 
 // ワールドにすべてのボディ（オブジェクト）を追加

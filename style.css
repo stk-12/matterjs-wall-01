@@ -22,7 +22,7 @@ body {
 .ttl {
   font-size: 15px;
   font-weight: 400;
-  color: #fff;
+  color: #444442;
   position: fixed;
   top: 0;
   left: 0;
@@ -38,6 +38,7 @@ body {
 }
 .contents p {
   font-size: 10vw;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: #444442;
-  font-weight: 600;
 }
